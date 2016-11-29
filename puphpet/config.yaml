@@ -15,30 +15,32 @@ vagrantfile:
                     vmware:
                         numvcpus: 1
                     parallels:
-                        use_linked_clone: 0
+                        linked_clone: 0
                         check_guest_tools: 0
                         update_guest_tools: 0
                 machines:
-                    vflm_xl27mha0qsl7:
+                    vflm_ygmy3d96a8ud:
                         id: dynamic_dev
                         hostname: dynamic.dev
                         network:
                             private_network: 192.168.56.101
                             forwarded_port:
-                                vflmnfp_qbc3281hesxq:
+                                vflmnfp_p1qkfylzjof7:
                                     host: '8449'
                                     guest: '22'
-                        memory: '512'
+                        memory: '1024'
                         cpus: '1'
         provision:
             puppet:
                 manifests_path: puphpet/puppet/manifests
-                module_path: puphpet/puppet/modules
+                module_path:
+                    - puphpet/puppet/modules
+                    - puphpet/puppet/manifests
                 options:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
-            vflsf_s3giptytoa39:
+            vflsf_i2x1gjvfsam3:
                 source: ./
                 target: /var/www
                 sync_type: nfs
@@ -105,25 +107,22 @@ cron:
 nginx:
     install: '0'
     settings:
+        version: present
         default_vhost: 1
-        proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
+        proxy_buffer_size: 128k
         proxy_connect_timeout: 600s
         proxy_send_timeout: 600s
         proxy_read_timeout: 600s
         names_hash_bucket_size: 128
     upstreams: {  }
     vhosts:
-        nxv_8oh5fmej400i:
+        nxv_37us8ljqakvs:
             server_name: awesome.dev
             server_aliases:
                 - www.awesome.dev
             www_root: /var/www/awesome
             listen_port: '80'
-            index_files:
-                - index.html
-                - index.htm
-                - index.php
             client_max_body_size: 1m
             ssl: '0'
             ssl_cert: ''
@@ -134,7 +133,8 @@ nginx:
             rewrite_to_https: '1'
             spdy: '1'
             locations:
-                nxvl_2kr30ws5u2py:
+                nxvl_ftpe5xtol556:
+                    www_root: ''
                     location: /
                     try_files:
                         - $uri
@@ -145,7 +145,8 @@ nginx:
                     fastcgi_split_path: ''
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_0hk2hjxdt7w9:
+                nxvl_7vdxwk533dj3:
+                    www_root: ''
                     location: '~ \.php$'
                     try_files:
                         - $uri
@@ -176,7 +177,7 @@ apache:
         - proxy_fcgi
         - rewrite
     vhosts:
-        av_dqzksn2p5j9r:
+        av_5buje4grzn6v:
             servername: dynamic.dev
             serveraliases:
                 - www.dynamic.dev
@@ -195,7 +196,7 @@ apache:
             ssl_protocol: ''
             ssl_cipher: ''
             directories:
-                avd_65lft2wl5az0:
+                avd_djawab609uv2:
                     path: /var/www/public
                     options:
                         - Indexes
@@ -207,7 +208,7 @@ apache:
                         - 'all granted'
                     custom_fragment: ''
                     files_match:
-                        avdfm_5awg4z32lame:
+                        avdfm_clgsvrl5qox5:
                             path: \.php$
                             sethandler: 'proxy:fcgi://127.0.0.1:9000'
                             custom_fragment: ''
@@ -221,7 +222,7 @@ letsencrypt:
 php:
     install: '1'
     settings:
-        version: '56'
+        version: '5.6'
     modules:
         php:
             - cli
@@ -242,7 +243,7 @@ php:
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
-        phpfp_46puqb2pgt1v:
+        phpfp_7m1ej983iq3w:
             ini:
                 prefix: www
                 listen: '127.0.0.1:9000'
@@ -285,14 +286,14 @@ drush:
 ruby:
     install: '1'
     versions:
-        rv_evwtc053jjgy:
+        rv_lvq0ckcp91co:
             default: '1'
             bundler: '1'
-            version: 1.9.3
+            version: 2.2.5
             gems:
-                - deep_merge@1.0.1
-                - activesupport@4.2.6
-                - vine@0.2
+                - deep_merge
+                - activesupport
+                - vine
 python:
     install: '1'
     packages: {  }
@@ -304,7 +305,6 @@ nodejs:
     npm_packages: {  }
 hhvm:
     install: '0'
-    nightly: 0
     composer: '1'
     composer_home: ''
     settings: {  }
@@ -320,20 +320,20 @@ hhvm:
 mariadb:
     install: '1'
     settings:
-        version: '10.1'
+        version: '10.2'
         root_password: root
         override_options: {  }
     adminer: '1'
     users:
-        mariadbnu_f3jr14im2vuo:
+        mariadbnu_vaepxb2b29vr:
             name: dynamic
             password: dynamic
     databases:
-        mariadbnd_mvm48p8yx2g3:
+        mariadbnd_adwz3lv6kzhv:
             name: dynamic
             sql: ''
     grants:
-        mariadbng_wz1c2id5sunm:
+        mariadbng_ph8m7gs0va06:
             user: dynamic
             table: '*.*'
             privileges:
@@ -346,15 +346,15 @@ mysql:
         override_options: {  }
     adminer: 0
     users:
-        mysqlnu_n84v5g16uvu5:
+        mysqlnu_r6oeqygseus9:
             name: dbuser
             password: '123'
     databases:
-        mysqlnd_pyjhg1s5va4g:
+        mysqlnd_zlla45hqiwwl:
             name: dbname
             sql: ''
     grants:
-        mysqlng_6q30niieica1:
+        mysqlng_62gxps82f2qq:
             user: dbuser
             table: '*.*'
             privileges:
@@ -419,7 +419,7 @@ elastic_search:
         version: 2.3.1
         java_install: true
     instances:
-        esi_zj2nb2axclmc:
+        esi_98q9wed75byo:
             name: es-01
 solr:
     install: '0'
