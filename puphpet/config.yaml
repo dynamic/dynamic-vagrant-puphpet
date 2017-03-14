@@ -28,7 +28,7 @@ vagrantfile:
                                 vflmnfp_p1qkfylzjof7:
                                     host: '8449'
                                     guest: '22'
-                        memory: '1024'
+                        memory: '512'
                         cpus: '1'
         provision:
             puppet:
@@ -323,7 +323,7 @@ mariadb:
         version: '10.2'
         root_password: root
         override_options: {  }
-    adminer: '1'
+    adminer: '0'
     users:
         mariadbnu_vaepxb2b29vr:
             name: dynamic
