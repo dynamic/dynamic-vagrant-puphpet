@@ -222,7 +222,7 @@ letsencrypt:
 php:
     install: '1'
     settings:
-        version: '5.6'
+        version: '56'
     modules:
         php:
             - cli
@@ -233,6 +233,7 @@ php:
             - tidy
             - dom
             - simplexml
+            - mcrypt
         pear: {  }
         pecl: {  }
     ini:
