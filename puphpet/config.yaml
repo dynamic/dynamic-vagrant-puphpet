@@ -86,7 +86,8 @@ vagrantfile:
         no_proxy: ''
 server:
     install: '1'
-    packages: {  }
+    packages:
+        - zip
 users_groups:
     install: '1'
     groups: {  }
@@ -232,6 +233,7 @@ php:
             - dom
             - simplexml
             - mcrypt
+            - intl
         pear: {  }
         pecl: {  }
     ini:
